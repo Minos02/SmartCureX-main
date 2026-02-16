@@ -829,8 +829,8 @@ def get_predictions():
         print(f"❌ Get predictions error: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/', defaults={'path': ''}, methods=['GET'])
+@app.route('/<path:path>', methods=['GET'])
 def serve_react(path):
     if path and os.path.exists(os.path.join('client-build', path)):
         return send_from_directory('client-build', path)
